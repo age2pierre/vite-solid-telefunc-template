@@ -1,5 +1,5 @@
 import { Link, useLocation, useRoutes } from '@solidjs/router'
-import type { Component } from 'solid-js'
+import { type Component } from 'solid-js'
 
 import { routes } from './routes'
 
@@ -24,6 +24,11 @@ const App: Component = () => {
           <li class="py-2 px-4">
             <Link href="/error" class="no-underline hover:underline">
               Error
+            </Link>
+          </li>
+          <li class="py-2 px-4">
+            <Link href="/auth" class="no-underline hover:underline">
+              Auth
             </Link>
           </li>
 

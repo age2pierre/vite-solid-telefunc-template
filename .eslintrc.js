@@ -5,6 +5,8 @@ module.exports = {
     'plugin:solid/typescript',
     'plugin:prettier/recommended',
   ],
+  ignorePatterns: ['src/edgeql/**/*', 'dist/**/*', 'node_modules/**/*'],
+  root: true,
   plugins: ['@typescript-eslint', 'solid', 'simple-import-sort', 'prettier'],
   env: {
     es6: true,

@@ -4,7 +4,7 @@ import { lazy } from 'solid-js'
 import { AboutData } from './about.data'
 import Home from './home.page'
 
-export const routes: RouteDefinition[] = [
+export const routes = [
   {
     path: '/',
     component: Home,
@@ -18,4 +18,8 @@ export const routes: RouteDefinition[] = [
     path: '**',
     component: lazy(() => import('./404.page')),
   },
-]
+  {
+    path: '/auth',
+    component: lazy(() => import('./auth.page')),
+  },
+] as const satisfies readonly RouteDefinition[]
