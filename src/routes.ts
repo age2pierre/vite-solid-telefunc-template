@@ -1,8 +1,8 @@
 import type { RouteDefinition } from '@solidjs/router'
 import { lazy } from 'solid-js'
 
-import AboutData from './pages/about.data'
-import Home from './pages/home'
+import { AboutData } from './about.data'
+import Home from './home.page'
 
 export const routes: RouteDefinition[] = [
   {
@@ -11,11 +11,11 @@ export const routes: RouteDefinition[] = [
   },
   {
     path: '/about',
-    component: lazy(() => import('./pages/about')),
+    component: lazy(() => import('./about.page')),
     data: AboutData,
   },
   {
     path: '**',
-    component: lazy(() => import('./errors/404')),
+    component: lazy(() => import('./404.page')),
   },
 ]

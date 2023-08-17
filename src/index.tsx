@@ -20,5 +20,5 @@ render(
       <App />
     </Router>
   ),
-  root,
+  root!,
 )

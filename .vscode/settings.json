@@ -1,0 +1,13 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "docwriter.progress.trackTypes": true,
+  "docwriter.progress.trackMethods": false,
+  "docwriter.progress.trackFunctions": true,
+  "docwriter.style": "JSDoc",
+  "docwriter.progress.trackClasses": false
+}
