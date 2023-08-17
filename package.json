@@ -6,19 +6,30 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "lint": "eslint --fix 'src/**/*.@(ts|tsx)'",
+    "serve": "vite preview",
+    "prepare": "husky install"
   },
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
-    "solid-devtools": "^0.27.3",
-    "tailwindcss": "^3.3.2",
-    "vite": "^4.3.9",
-    "vite-plugin-solid": "^2.7.0"
+    "@typescript-eslint/eslint-plugin": "6.4.0",
+    "@typescript-eslint/parser": "6.4.0",
+    "autoprefixer": "10.4.15",
+    "eslint": "8.47.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "eslint-plugin-solid": "0.12.1",
+    "husky": "8.0.3",
+    "postcss": "8.4.28",
+    "prettier": "3.0.2",
+    "solid-devtools": "0.27.7",
+    "tailwindcss": "3.3.3",
+    "vite": "4.4.9",
+    "vite-plugin-solid": "2.7.0"
   },
   "dependencies": {
-    "@solidjs/router": "^0.8.2",
-    "solid-js": "^1.7.6"
+    "@solidjs/router": "0.8.3",
+    "solid-js": "1.7.11"
   }
 }
