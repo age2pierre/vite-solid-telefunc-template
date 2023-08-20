@@ -1,30 +1,19 @@
 import { createForm } from '@felte/solid'
+import { createSignal, untrack } from 'solid-js'
 import { config } from 'telefunc/client'
 
 import { login, signup } from './auth.telefunc'
 
 export default function Auth() {
-  const { form: loginForm } = createForm<{
-    username: string
-    password: string
-  }>({
-    onSubmit: async (values) => {
-      const res = await login(values)
-      if (res.status === 'ok') {
-        config.httpHeaders = {
-          ...(config.httpHeaders ?? {}),
-          authorization: `Bearer ${res.token}`,
-        }
-      }
-    },
-  })
+  const [authAction, setAuthAction] = createSignal<'signup' | 'login'>('signup')
 
-  const { form: signupForm } = createForm<{
+  const { form } = createForm<{
     username: string
     password: string
   }>({
     onSubmit: async (values) => {
-      const res = await signup(values)
+      const action = untrack(() => authAction())
+      const res = await (action === 'signup' ? signup : login)(values)
       if (res.status === 'ok') {
         config.httpHeaders = {
           ...(config.httpHeaders ?? {}),
@@ -35,41 +24,76 @@ export default function Auth() {
   })
 
   return (
-    <section class="bg-gray-100 text-gray-700 p-8">
-      <h1 class="text-2xl font-bold">Auth</h1>
-      <h3 class="text-xl">Login</h3>
-      <form use:loginForm>
-        <label class="block" for="usernameInput">
-          Username
-        </label>
-        <input id="usernameInput" type="text" name="username" />
-        <label class="block" for="passwordInput">
-          Password
-        </label>
-        <input id="passwordInput" type="password" name="password" />
-        <input type="submit" value="Login" />
+    <section class="card-bordered w-96 shadow-xl bg-base-100 self-center">
+      <form use:form>
+        <div class="card-body">
+          <h1 class="card-title self-center">Authenticate</h1>
+          <div class="tabs tabs-boxed w-max self-center">
+            <button
+              classList={{
+                tab: true,
+                'tab-active': authAction() === 'signup',
+              }}
+              onClick={(e) => {
+                e.preventDefault()
+                setAuthAction('signup')
+              }}
+            >
+              Sign Up
+            </button>
+            <button
+              classList={{
+                tab: true,
+                'tab-active': authAction() === 'login',
+              }}
+              onClick={(e) => {
+                e.preventDefault()
+                setAuthAction('login')
+              }}
+            >
+              Login
+            </button>
+          </div>
+          <div class="form-control">
+            <label class="label" for="usernameInput">
+              Username
+            </label>
+            <input
+              class="input input-bordered max-w-xs"
+              id="usernameInput"
+              type="text"
+              name="username"
+            />
+          </div>
+          <div class="form-control">
+            <label class="label" for="passwordInput">
+              Password
+            </label>
+            <input
+              class="input input-bordered max-w-xs"
+              id="passwordInput"
+              type="password"
+              name="password"
+            />
+          </div>
+          <div class="card-actions justify-end">
+            <button
+              class="btn btn-primary btn-outline"
+              onClick={(e) => {
+                e.preventDefault()
+                delete config.httpHeaders?.['authorization']
+              }}
+            >
+              Log out
+            </button>
+            <input
+              class="btn btn-primary"
+              type="submit"
+              value={authAction() === 'login' ? 'Login' : 'Sign up'}
+            />
+          </div>
+        </div>
       </form>
-
-      <h3 class="text-xl">Sign Up</h3>
-      <form use:signupForm>
-        <label class="block" for="usernameInput">
-          Username
-        </label>
-        <input id="usernameInput" type="text" name="username" />
-        <label class="block" for="passwordInput">
-          Password
-        </label>
-        <input id="passwordInput" type="password" name="password" />
-        <input type="submit" value="Sign up" />
-      </form>
-
-      <button
-        onClick={() => {
-          delete config.httpHeaders?.['authorization']
-        }}
-      >
-        Log out
-      </button>
     </section>
   )
 }
@@ -78,8 +102,7 @@ declare module 'solid-js' {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface Directives {
-      loginForm: true
-      signupForm: true
+      form: true
     }
   }
 }

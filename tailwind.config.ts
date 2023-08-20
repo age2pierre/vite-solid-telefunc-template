@@ -1,3 +1,5 @@
+import typo from '@tailwindcss/typography'
+import daisyui from 'daisyui'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -5,7 +7,7 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [typo, daisyui],
 }
 
 export default config
