@@ -7,11 +7,21 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["vite/client", "vitest/importMeta"],
+    "types": [
+      "vite/client",
+      "vitest/importMeta"
+    ],
     "noEmit": true,
     "strict": true,
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ],
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

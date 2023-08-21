@@ -59,7 +59,7 @@ async function startServer() {
   if (isProduction) {
     // serve static file in prod
     app.use(express.static(`${__dirname}/../dist/client/`))
-    app.get('/*', (_req, res) => {
+    app.get('*', (_req, res) => {
       res.sendFile(`${__dirname}/../dist/client/index.html`)
     })
   } else {

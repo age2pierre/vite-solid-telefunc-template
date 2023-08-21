@@ -8,7 +8,7 @@ export default function Home() {
       <h1>Home</h1>
       <p>This is the home page.</p>
 
-      <div>
+      <div class="flex gap-2">
         <button
           class="btn btn-sm"
           onClick={() => {
